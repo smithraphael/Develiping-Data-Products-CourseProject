@@ -52,6 +52,10 @@ tags$b("Apriori algorithm"),
 helpText("This is part of the analysis of 'apriori algorithm'
         (one of the machine learning techniques),which can be
          used to learn with wholesale's transactions and suggest the next
-         best offer for the client, based on previous buying behaviour")
+         best offer for the client, based on previous buying behaviour"),
+
+
+tags$b(helpText(a("Click here to see technical details on GITHUB", href="https://github.com/smithraphael/Develiping-Data-Products-CourseProject")
+))
 
 ))
