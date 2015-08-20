@@ -1,0 +1,73 @@
+---
+title       : Developing Data Products
+subtitle    : Course Project - Association Rules using apriori algorithm
+author      : Raphael Smith
+job         : Analytics
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Objective
+
+Introduce **apriori algorithm** as a potential technique to suggest the Next Best Offer
+for a client.
+
+Note: It will be presented just an initial analysis for Course purposes.
+
+--- .class #id 
+
+## Apriori algorithm
+
+Apriori is an an algorithm for frequent item set mining and association rule learning over transactional databases.
+Baically it learns through sequence of transactions how products are linked each other.
+apriori calculates 3 indicators to present rules:
+- ***Support*** --> frequency of how many times a certain rule is found
+  - Eg _{cheese}_ appears in 1% of the whole dataset or _{cheese, bread}_ appears 0.1%
+
+- **Confidence** --> Conditional probability of a certain rule is found in a group of 
+  - Eg: _{cheese}_ appears in 25% of the dataset _{cheese, bread}_
+
+- **Lift** --> Examinates the independence level of a certain rule: If lift = 1, then variables are independent
+  - Eg: _{cheese, bread}_ appears in 0.1% of the dataset _{cheese, bread}_
+
+---
+## Output
+
+```{r, echo=FALSE, results='hide'}
+library(arules);library(arulesViz)
+data("Groceries")
+
+rules = apriori(Groceries, parameter=list(support = 0.001, confidence = 0.8))
+
+
+
+```
+
+```{r, echo=FALSE}
+
+inspect(rules[1:10])
+
+```
+
+---
+
+## Plotting rules
+
+
+```{r, echo=FALSE}
+plot(rules, method = "grouped")
+```
+
+---
+
+## Analysis
+
+
+By the data shown on previous slide, we can assume that 90% of people who buy {liquor}
+and {red/blush wine}, also would buy a {bottled beer}, indicating the possible Next Best Offer for this specific transaction.
+See at the plot, in the first row the size of the circle, presenting a high relation
+between these products.
